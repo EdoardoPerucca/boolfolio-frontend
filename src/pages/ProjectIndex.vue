@@ -1,10 +1,11 @@
 <script>
 import axios from 'axios';
 
-import ProjectItem from './ProjectItem.vue';
+import ProjectItem from '../components/ProjectItem.vue';
+
 
 export default {
-    name: 'AppMain',
+    name: 'ProjectIndex',
 
     data() {
         return {
@@ -37,12 +38,11 @@ export default {
         },
     }
 }
-
 </script>
 
 <template>
     <div class="container py-4 mb-3">
-        <h1>Progetti</h1>
+        <h1>Tutti i Progetti</h1>
 
         <div class="row">
             <div v-for="project in projects" class="col-md-6 col-lg-4 mb-3">
@@ -63,7 +63,7 @@ export default {
     </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .project-nav {
     display: flex;
     gap: 5px;

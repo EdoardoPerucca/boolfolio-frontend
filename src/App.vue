@@ -1,23 +1,29 @@
 <script>
-import AppMain from './components/AppMain.vue';
+import AppHeader from './components/AppHeader.vue';
+//import AppMain from './components/AppMain.vue';
+import AppFooter from './components/AppFooter.vue';
+
 
 export default {
   name: "app",
 
   data() {
 
-
   },
 
   components: {
-    AppMain,
+    AppHeader,
+    //AppMain,
+    AppFooter,
   }
 }
 </script>
 
 <template>
   <div class="container">
-    <AppMain></AppMain>
+    <AppHeader></AppHeader>
+    <router-view></router-view>
+    <AppFooter></AppFooter>
   </div>
 </template>
 
