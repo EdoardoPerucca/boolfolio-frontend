@@ -10,11 +10,13 @@ export default {
     data() {
         return {
 
-            apuURL: 'http://127.0.0.1:8000/api/projects',
+            apiURL: 'http://127.0.0.1:8000/api/projects',
 
             projects: [],
 
             pagination: {},
+
+            selectedTechnologyId: '',
         }
     },
 
@@ -23,17 +25,18 @@ export default {
     },
 
     mounted() {
-        this.getProjects(this.apuURL);
+        this.getProjects(this.apiURL);
     },
 
     methods: {
-        getProjects(apuURL) {
-            axios.get(apuURL).then(response => {
+        getProjects(apiURL) {
+            axios.get(apiURL).then(response => {
                 console.log(response.data.result);
 
                 this.projects = response.data.result.data;
 
                 this.pagination = response.data.result;
+                this.technologies = response.data.allTechnology;
             });
         },
     }
@@ -42,22 +45,36 @@ export default {
 
 <template>
     <div class="container py-4 mb-3">
-        <h1>Tutti i Progetti</h1>
 
-        <div class="row">
-            <div v-for="project in projects" class="col-md-6 col-lg-4 mb-3">
-                <ProjectItem :project="project"></ProjectItem>
+        <div v-if="projects.length > 0">
+
+            <h1>Tutti i Progetti</h1>
+
+            <form action="">
+                <select name="technology_id" id="technology_id" class="form-select" v-model="selectedTechnologyId">
+                    <option value="">Tutte</option>
+                    <option v-for="technology in technologies" :value="technology.id">{{ technology.name }}</option>
+                </select>
+            </form>
+
+            <hr>
+
+            <div class="row">
+                <div v-for="project in projects" class="col-md-6 col-lg-4 mb-3">
+                    <ProjectItem :project="project"></ProjectItem>
+                </div>
             </div>
-        </div>
 
-        <hr>
+            <hr>
 
-        <div class="project-nav">
-            <button v-for="link in pagination.links" class="btn"
-                :class="link.active ? 'btn-primary' : 'btn-outline-secondary'" v-html="link.label"
-                :disabled="link.url == null ? true : false" @click="getProjects(link.url)">
+            <div class="project-nav">
+                <button v-for="link in pagination.links" class="btn"
+                    :class="link.active ? 'btn-primary' : 'btn-outline-secondary'" v-html="link.label"
+                    :disabled="link.url == null ? true : false" @click="getProjects(link.url)">
 
-            </button>
+                </button>
+            </div>
+
         </div>
 
     </div>
