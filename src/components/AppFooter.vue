@@ -13,7 +13,7 @@ export default {
 </script>
 
 <template>
-    <h3>Fine Sito</h3>
+    <h3>Footer</h3>
 </template>
 
 <style lang="scss" scoped></style>

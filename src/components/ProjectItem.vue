@@ -62,6 +62,11 @@ export default {
             <p>
                 {{ content }}
             </p>
+
+            <div class="text-center">
+                <router-Link :to="{ name: 'projects.show', params: { slug: project.slug } }"
+                    class="btn btn-outline-primary">Leggi</router-Link>
+            </div>
         </div>
 
     </div>
