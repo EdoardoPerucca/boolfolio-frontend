@@ -5,7 +5,7 @@ export default {
 
     data() {
         return {
-
+            baseUrl: 'http://127.0.0.1:8000/',
         }
     },
 
@@ -24,7 +24,7 @@ export default {
 
         coverImage() {
             if (this.project.cover_image) {
-                return 'http://127.0.0.1:8000/storage/' + this.project.cover_image;
+                return this.baseUrl + 'storage/' + this.project.cover_image;
             } else {
                 return 'https://pariwisatabengkulu.com/assets/images/no-image.png';
             }
@@ -43,7 +43,7 @@ export default {
 </script>
 
 <template>
-    <div class="card">
+    <div class="card" style="width: 18rem;">
         <div class="cover-card">
             <img :src="coverImage" alt="copertina">
         </div>
